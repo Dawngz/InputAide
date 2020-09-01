@@ -1,3 +1,4 @@
+#define DLL_EXPORT_NET _declspec(dllexport)
 #include "NetConnection.h"
 #include "NetServer.h"
 namespace net
@@ -5,7 +6,16 @@ namespace net
 	NetConnection::NetConnection(StrandPtr strand, SocketPtr socket)
 		:m_strand(strand),m_socket(socket)
 	{
+		init();
+	}
 
+	void NetConnection::init()
+	{
+		m_bConnected = false;
+		m_recvBuf.resize(100);
+		m_recvBufLen = 0;
+		m_lastSendTime = INT32_MAX;
+		m_lastRecvTime = INT32_MAX;
 	}
 
 	boost::asio::ip::tcp::socket & NetConnection::getSocket()
@@ -44,12 +54,12 @@ namespace net
 
 	void NetConnection::onConnectionMade()
 	{
-
+		std::cout << "connect success!" << std::endl;
 	}
 
 	void NetConnection::onConnectionError(const boost::system::error_code& err)
 	{
-
+		std::cout << "disconnect!" << std::endl;
 	}
 
 	void NetConnection::recvData()
@@ -61,7 +71,7 @@ namespace net
 
 		try
 		{
-			m_socket->async_read_some(boost::asio::buffer(&m_recvBuf[0], m_recvBuf.size()), m_strand->wrap(boost::bind(&NetConnection::handleRecvData, shared_from_this(), placeholders::error, placeholders::bytes_transferred)));
+			m_socket->async_read_some(boost::asio::buffer((void*)&m_recvBuf[0], m_recvBuf.size()), m_strand->wrap(boost::bind(&NetConnection::handleRecvData, shared_from_this(), placeholders::error, placeholders::bytes_transferred)));
 		}
 		catch (...)
 		{
@@ -108,17 +118,31 @@ namespace net
 		{
 			close();
 			onConnectionError(err);
-			m_server->removeConnection(shared_from_this());
+			boost::shared_ptr<NetManager> manager = m_pNetManager.lock();
+			if (NULL != manager)
+			{
+				manager->removeConnection(shared_from_this());
+			}
 		}
 	}
 
-	void NetConnection::setServer(NetServerPtr server)
+	void NetConnection::setNetManager(boost::shared_ptr<NetManager> pNetManager)
 	{
-		m_server = server;
+		m_pNetManager = pNetManager;
 	}
 
 	void NetConnection::onDataReceived(const ByteArray& data, int len)
 	{
-
+		unsigned char* content = new unsigned char[64];
+		memset(content, 0, sizeof(content));
+		for (int i = 0; i < len; ++i)
+		{
+			content[i] = data[i];
+		}
+		boost::shared_ptr<NetManager> manager = m_pNetManager.lock();
+		if (NULL != manager)
+		{
+			manager->onPackageReceived(content, len, shared_from_this());
+		}
 	}
 }

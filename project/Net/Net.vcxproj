@@ -148,10 +148,12 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\Net\NetCommon.h" />
     <ClInclude Include="..\..\src\Net\NetConnection.h" />
+    <ClInclude Include="..\..\src\Net\NetManager.h" />
     <ClInclude Include="..\..\src\Net\NetServer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Net\NetConnection.cpp" />
+    <ClCompile Include="..\..\src\Net\NetManager.cpp" />
     <ClCompile Include="..\..\src\Net\NetServer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

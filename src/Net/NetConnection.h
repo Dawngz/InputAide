@@ -1,6 +1,6 @@
 #pragma once
 #include "NetCommon.h"
-
+#include "NetManager.h"
 namespace net
 {
 	class DLL_EXPORT_NET NetConnection : public boost::enable_shared_from_this<NetConnection>
@@ -12,7 +12,7 @@ namespace net
 		void setPeerPort(unsigned short port);
 		void close();
 		int start();
-		void setServer(NetServerPtr server);
+		void setNetManager(boost::shared_ptr<NetManager> pNetManager);
 		void onDataReceived(const ByteArray& data, int len);
 	protected:
 		virtual void onConnectionMade();
@@ -21,6 +21,7 @@ namespace net
 		void handleRecvData(const boost::system::error_code& err, int bytesReceived);
 		void handleConnectionError(const boost::system::error_code& err);
 	private:
+		void init();
 		StrandPtr				m_strand;
 		SocketPtr				m_socket;
 		string                  m_peerIp;               /* 对端ip */
@@ -30,6 +31,6 @@ namespace net
 		int						m_lastRecvTime;
 		ByteArray               m_recvBuf;          /* 接收缓冲*/
 		int						m_recvBufLen;
-		NetServerPtr            m_server;
+		boost::weak_ptr<NetManager>     m_pNetManager;          /* 连接管理器 */
 	};
 }

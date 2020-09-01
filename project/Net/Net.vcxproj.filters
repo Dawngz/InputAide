@@ -24,12 +24,18 @@
     <ClInclude Include="..\..\src\Net\NetConnection.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Net\NetManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Net\NetServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Net\NetConnection.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Net\NetManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -123,7 +123,7 @@ NetServer::~NetServer()
 void NetServer::startAccept()
 {
 	boost::shared_ptr<NetConnection> connection = createConnection();
-	connection->setServer(shared_from_this());
+	connection->setNetManager(shared_from_this());
 	m_acceptor.async_accept(connection->getSocket(), m_acceptorStrand->wrap(boost::bind(&NetServer::handleAccept, shared_from_this(), boost::asio::placeholders::error, connection)));
 }
 
@@ -189,20 +189,6 @@ void NetServer::handleAccept(const boost::system::error_code& err, boost::shared
 			m_acceptTimer.async_wait(m_acceptorStrand->wrap(boost::bind(&NetServer::onAcceptTimer, shared_from_this(), _1)));
 		}
 	}
-}
-
-void NetServer::addConnection(boost::shared_ptr<NetConnection> connection)
-{
-	boost::recursive_mutex::scoped_lock rlock(m_mutex);
-	m_connectionPool.insert(connection);
-}
-
-void NetServer::removeConnection(boost::shared_ptr<NetConnection> connection)
-{
-	boost::recursive_mutex::scoped_lock rlock(m_mutex);
-	connection->close();
-	if (m_connectionPool.find(connection) != m_connectionPool.end())
-		m_connectionPool.erase(connection);
 }
 
 void NetServer::onAccept(boost::shared_ptr<NetConnection> connection)

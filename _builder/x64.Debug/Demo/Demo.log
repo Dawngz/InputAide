@@ -1,5 +1,62 @@
-﻿生成启动时间为 2020/8/14 星期五 16:33:02。
+﻿生成启动时间为 2020/9/1 星期二 17:54:19。
+     1>项目“E:\myproject\InputAide\project\Demo\Demo.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /IE:\myproject\InputAide\\src /IE:\Code\Boost1.58 /ZI /nologo /W3 /WX- /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"E:\myproject\InputAide\_builder\x64.Debug\Demo\\" /Fd"E:\myproject\InputAide\_builder\x64.Debug\Demo\vc140.pdb" /Gd /TP /errorReport:prompt ..\..\src\Demo\main.cpp
+         main.cpp
+         Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+         - add -D_WIN32_WINNT=0x0501 to the compiler command line; or
+         - add _WIN32_WINNT=0x0501 to your project's Preprocessor Definitions.
+         Assuming _WIN32_WINNT=0x0501 (i.e. Windows XP target).
+     1>e:\myproject\inputaide\src\net\netconnection.h(7): warning C4251: “boost::enable_shared_from_this<net::NetConnection>::weak_this_”: class“boost::weak_ptr<T>”需要有 dll 接口由 class“boost::enable_shared_from_this<net::NetConnection>”的客户端使用
+                 with
+                 [
+                     T=net::NetConnection
+                 ]
+     1>e:\myproject\inputaide\src\net\netconnection.h(25): warning C4251: “net::NetConnection::m_strand”: class“boost::shared_ptr<boost::asio::strand>”需要有 dll 接口由 class“net::NetConnection”的客户端使用
+     1>e:\myproject\inputaide\src\net\netconnection.h(26): warning C4251: “net::NetConnection::m_socket”: class“boost::shared_ptr<boost::asio::ip::tcp::socket>”需要有 dll 接口由 class“net::NetConnection”的客户端使用
+     1>e:\myproject\inputaide\src\net\netconnection.h(27): warning C4251: “net::NetConnection::m_peerIp”: class“std::basic_string<char,std::char_traits<char>,std::allocator<char>>”需要有 dll 接口由 class“net::NetConnection”的客户端使用
+     1>e:\myproject\inputaide\src\net\netconnection.h(32): warning C4251: “net::NetConnection::m_recvBuf”: class“std::vector<boost::asio::detail::buffered_stream_storage::byte_type,std::allocator<_Ty>>”需要有 dll 接口由 class“net::NetConnection”的客户端使用
+                 with
+                 [
+                     _Ty=boost::asio::detail::buffered_stream_storage::byte_type
+                 ]
+     1>e:\myproject\inputaide\src\net\netconnection.h(34): warning C4251: “net::NetConnection::m_pNetManager”: class“boost::weak_ptr<net::NetManager>”需要有 dll 接口由 class“net::NetConnection”的客户端使用
+     1>e:\myproject\inputaide\src\net\netmanager.h(13): warning C4251: “net::NetManager::m_mutex”: class“boost::recursive_mutex”需要有 dll 接口由 class“net::NetManager”的客户端使用
+         e:\code\boost1.58\boost\thread\win32\recursive_mutex.hpp(24): note: 参见“boost::recursive_mutex”的声明
+     1>e:\myproject\inputaide\src\net\netmanager.h(14): warning C4251: “net::NetManager::m_connectionPool”: class“std::set<boost::shared_ptr<net::NetConnection>,std::less<_Kty>,std::allocator<_Kty>>”需要有 dll 接口由 class“net::NetManager”的客户端使用
+                 with
+                 [
+                     _Kty=boost::shared_ptr<net::NetConnection>
+                 ]
+     1>e:\myproject\inputaide\src\net\netserver.h(7): warning C4251: “boost::enable_shared_from_this<net::NetServer>::weak_this_”: class“boost::weak_ptr<T>”需要有 dll 接口由 class“boost::enable_shared_from_this<net::NetServer>”的客户端使用
+                 with
+                 [
+                     T=net::NetServer
+                 ]
+     1>e:\myproject\inputaide\src\net\netserver.h(29): warning C4251: “net::NetServer::m_listenIp”: class“std::basic_string<char,std::char_traits<char>,std::allocator<char>>”需要有 dll 接口由 class“net::NetServer”的客户端使用
+     1>e:\myproject\inputaide\src\net\netserver.h(31): warning C4251: “net::NetServer::m_acceptorStrand”: class“boost::shared_ptr<boost::asio::strand>”需要有 dll 接口由 class“net::NetServer”的客户端使用
+     1>e:\myproject\inputaide\src\net\netserver.h(32): warning C4251: “net::NetServer::m_acceptor”: class“boost::asio::basic_socket_acceptor<boost::asio::ip::tcp,boost::asio::socket_acceptor_service<Protocol>>”需要有 dll 接口由 class“net::NetServer”的客户端使用
+                 with
+                 [
+                     Protocol=boost::asio::ip::tcp
+                 ]
+     1>e:\myproject\inputaide\src\net\netserver.h(33): warning C4251: “net::NetServer::m_acceptTimer”: class“boost::asio::basic_deadline_timer<boost::posix_time::ptime,boost::asio::time_traits<boost::posix_time::ptime>,boost::asio::deadline_timer_service<Time,TimeTraits>>”需要有 dll 接口由 class“net::NetServer”的客户端使用
+                 with
+                 [
+                     Time=boost::posix_time::ptime,
+                     TimeTraits=boost::asio::time_traits<boost::posix_time::ptime>
+                 ]
+     1>e:\myproject\inputaide\src\net\netserver.h(34): warning C4251: “net::NetServer::m_linstenTimer”: class“boost::asio::basic_deadline_timer<boost::posix_time::ptime,boost::asio::time_traits<boost::posix_time::ptime>,boost::asio::deadline_timer_service<Time,TimeTraits>>”需要有 dll 接口由 class“net::NetServer”的客户端使用
+                 with
+                 [
+                     Time=boost::posix_time::ptime,
+                     TimeTraits=boost::asio::time_traits<boost::posix_time::ptime>
+                 ]
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\myproject\InputAide\_runtime\x64.Debug\Demo.exe" /INCREMENTAL /NOLOGO /LIBPATH:E:\myproject\InputAide\_runtime\x64.Debug\ /LIBPATH:E:\Code\Boost1.58\stage\lib64 Net.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\myproject\InputAide\_runtime\x64.Debug\Demo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\myproject\InputAide\_runtime\x64.Debug\Demo.lib" /MACHINE:X64 E:\myproject\InputAide\_builder\x64.Debug\Demo\main.obj
+         Demo.vcxproj -> E:\myproject\InputAide\_runtime\x64.Debug\Demo.exe
+     1>已完成生成项目“E:\myproject\InputAide\project\Demo\Demo.vcxproj”(Build 个目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:00.00
+已用时间 00:00:02.00

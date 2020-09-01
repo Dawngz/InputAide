@@ -1,24 +1,24 @@
 #pragma once
 #include "NetCommon.h"
-
+#include "NetManager.h"
 namespace net
 {
-	class DLL_EXPORT_NET NetServer : public boost::enable_shared_from_this<NetServer>
+	class DLL_EXPORT_NET NetServer :public NetManager , public boost::enable_shared_from_this<NetServer>
 	{
 	public:
-		
 		NetServer(io_service& ioservice, string listenIp, unsigned short listenPort, bool bReuseAddr = true, bool bAutoBind = false);
 		virtual ~NetServer();
-		int start(bool async = true);
+	public:
+		virtual int start(bool async = true)override;
 		virtual boost::shared_ptr<NetConnection> createConnection();
 		virtual void onAccept(boost::shared_ptr<NetConnection> connection);
-		void removeConnection(boost::shared_ptr<NetConnection> connection);
+		virtual void onPackageReceived(const unsigned char* content, const size_t& contentLen, boost::shared_ptr<net::NetConnection> connection)override
+		{}
 	protected:
 		void startAccept();
 		void onListenTimer(const boost::system::error_code& error);
 		void onAcceptTimer(const boost::system::error_code& error);
 		void handleAccept(const boost::system::error_code& err, boost::shared_ptr<NetConnection> connection);
-		void addConnection(boost::shared_ptr<NetConnection> connection);
 	private:
 		io_service &    m_ioservice;
 		string			m_listenIp;
@@ -30,7 +30,5 @@ namespace net
 		bool            m_bStopped;
 		bool            m_bAutoBind; //监听正常
 		bool            m_bReuseAddress;
-		boost::recursive_mutex m_mutex;                             /* 全局锁 */
-		set<boost::shared_ptr<NetConnection> > m_connectionPool;    /* 连接池 */
 	};
 }//end of namespace net

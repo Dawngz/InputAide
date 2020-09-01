@@ -32,4 +32,6 @@ namespace net
 	typedef boost::shared_ptr<boost::asio::ip::tcp::socket> SocketPtr;
 
 	typedef std::vector<BYTE> ByteArray;
+
+	class NetManager;
 }
